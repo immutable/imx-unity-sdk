@@ -1,0 +1,13 @@
+{
+  "name": "com.immutable.unitysdk",
+  "version": "0.0.1",
+  "displayName": "Immutable X SDK",
+  "description": "Immutable X Unity Package",
+  "unity": "2022.2",
+  "unityRelease": "2f1",
+  "author": {
+    "name": "Immutable",
+    "email": "unity@example.com",
+    "url": "https://www.unity3d.com"
+  }
+}

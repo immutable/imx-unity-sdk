@@ -6,7 +6,9 @@ using api.Client;
 using api.Model;
 using UnityEngine;
 
-public class sdkTest : MonoBehaviour
+namespace imx.sdk
+{
+    public class sdkTest : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -83,4 +85,5 @@ public class sdkTest : MonoBehaviour
             Debug.Log(e.StackTrace);
         }
     }
+}
 }

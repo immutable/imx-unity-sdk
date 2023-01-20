@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace ImmutableSDK.Samples.GetListedAssets
 {
+    /// <summary>
+    /// Fetches listed assets on Immutable X sandbox to display
+    /// </summary>
 	public class GetListedAssets : MonoBehaviour
     {
          [SerializeField]
@@ -28,6 +31,9 @@ namespace ImmutableSDK.Samples.GetListedAssets
              assetObj.gameObject.SetActive(false);
          }
 
+         /// <summary>
+         /// Fetches assets and populates the AssetListObject ui list
+         /// </summary>
          public void FetchAssets()
          {
              // Sandbox config

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace ImmutableSDK.Samples.GetListedAssets
 {
+    /// <summary>
+    /// UI object representation of AssetWithOrders object returned from getting listed assets on Immutable X
+    /// </summary>
     public class AssetListObject : MonoBehaviour
     {
         [SerializeField]
@@ -27,6 +30,11 @@ namespace ImmutableSDK.Samples.GetListedAssets
         [SerializeField]
         private RawImage collectionImage = null;
     
+        
+        /// <summary>
+        /// Initialises the ui asset based on AssetWithOrders object
+        /// </summary>
+        /// <param name="asset">Immutable X asset</param>
         public void Initialise(AssetWithOrders asset)
         {
             collectionText.text = $"Collection: {asset.Collection.Name}";
@@ -46,6 +54,10 @@ namespace ImmutableSDK.Samples.GetListedAssets
             }
         }
         
+        /// <summary>
+        /// Downloads a web image and displays it in a unity raw image if successful, or a text override if not
+        /// </summary>
+        /// <param name="MediaUrl"> Image URL to resolve</param>
         IEnumerator DownloadImage(string MediaUrl)
         {   
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);

@@ -70,5 +70,10 @@ namespace ImmutableSDK.Samples.GetListedAssets
                  Debug.Log(e.StackTrace);
              }
          }
+
+         public void FetchDeposits()
+         {
+             ApiClient client = new ApiClient();
+         }
     }
 }

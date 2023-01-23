@@ -342,8 +342,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ImmutableSDK.Samples.GetUsers.GetUsersSample, Assembly-CSharp
+      - m_Target: {fileID: 737577197}
+        m_TargetAssemblyTypeName: ImmutableSDK.Samples.GetStarkKeys.GetUsersSample,
+          Assembly-CSharp
         m_MethodName: GetUser
         m_Mode: 1
         m_Arguments:

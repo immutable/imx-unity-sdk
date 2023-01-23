@@ -1,4 +1,4 @@
-Third Party Notices for Immutable X
+Third Party Notices
 
 Component Name: openapi-generator-cli
 From: openapitools

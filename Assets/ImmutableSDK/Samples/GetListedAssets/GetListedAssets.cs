@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using api.Api;
 using api.Client;
 using api.Model;
+using Sdk;
 using TMPro;
 using UnityEngine;
 
@@ -36,19 +37,18 @@ namespace ImmutableSDK.Samples.GetListedAssets
          /// </summary>
          public void FetchAssets()
          {
-             // Sandbox config
-             Configuration config = new Configuration();
-             config.BasePath = "https://api.sandbox.x.immutable.com";
-             
-             AssetsApi apiInstance = new AssetsApi(config);
-                 
              try
              {
                  // Get a list of assets
                  int pageSize = 50;
                  int.TryParse(pageInput.text, out pageSize);
+    
+                 // Create a client for sandbox assets and fetch
+                 Client client = new Client(new Config() {
+                     Environment = EnvironmentSelector.Sandbox
+                 });
+                 ListAssetsResponse result = client.ListAssets(pageSize, null, null, null, userInput.text);
                  
-                 ListAssetsResponse result = apiInstance.ListAssets(pageSize, null, null, null, userInput.text);
                  Debug.Log(result.ToJson());
                  
                  // Delete existing list

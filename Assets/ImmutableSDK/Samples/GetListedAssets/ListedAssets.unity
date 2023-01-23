@@ -2613,8 +2613,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GetListedAssets, Assembly-CSharp
+      - m_Target: {fileID: 243235545}
+        m_TargetAssemblyTypeName: ImmutableSDK.Samples.GetListedAssets.GetListedAssets,
+          Assembly-CSharp
         m_MethodName: FetchAssets
         m_Mode: 1
         m_Arguments:

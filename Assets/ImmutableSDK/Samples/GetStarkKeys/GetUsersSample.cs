@@ -4,7 +4,7 @@ using api.Model;
 using TMPro;
 using UnityEngine;
 
-namespace ImmutableSDK.Samples.GetUsers
+namespace ImmutableSDK.Samples.GetStarkKeys
 {
     /// <summary>
     /// Demo sample to get user information from Immutable API

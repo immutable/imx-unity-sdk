@@ -21,8 +21,11 @@ This example shows how to fetch assets and apply filters to get results.
 Load ListedAssets.unity as the active scene. If you do not have Text Mesh Pro set up, you will recieve a popup and can click to import TMP essentials.
 
 Hit play and you should get an empty list with input fields and a FETCH button. Clicking the fetch button will fetch assets from immutable sandbox and display them in the list, this may take a few seconds to populate.
+Name will allow you to filter by NFT name.
+Collection Address will allow you to filter by specific collections.
 Page Size will allow you to choose how many items to fetch, default is 50.
 User ID allows you to filter by specific user assets.
+Environment lets you choose between sandbox or main net assets.
 
 2. GetStarkKeys
 This examples shows how to fetch stark keys from a user ID for operations.

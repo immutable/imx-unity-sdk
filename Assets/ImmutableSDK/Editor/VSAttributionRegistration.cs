@@ -22,14 +22,14 @@ namespace ImmutableSDK.Editor
             DrawLine(Color.gray);
 
             DrawHelpBox("<b><size=12>Welcome to the Immutable Unity SDK!</size></b>\n\n" +
-                           "<size=11>This process manually registers your SDK instance with the\n" +
-                           "Unity Verified Solutions team via the Unity Editor Analytics API.\n" +
-                           "It's highly recommended in case you require any support.</size>\n\n" +
+                           "<size=11>This process manually registers your SDK instance with the Unity Verified Solutions team via " +  
+                           " the Unity Editor Analytics API. It's highly recommended in case you require any support.</size>\n\n" +
                            "<b><size=12>Get Started:</size></b>\n\n" +
-                           "<size=11>1. Register with your email address at the <a href=\"https://hub.immutable.com/\">Immutable Developer Hub</a>.\n" +
-                           "to access the ability to create projects on Immutable via the Public API or the CLI.\n" +
+                           "<size=11>1. Register with your email address at the <a href=\"https://hub.immutable.com/\">Immutable Developer Hub</a>"+
+                           " to access the ability to create projects on Immutable via the SDKs, Public API or the CLI.\n" +
                            "2. Enter the registered email address in the relevant field below and click Register.\n\n" +
-                           "More information on using the Immutable Unity SDK and APIs can be found at the <a href=\"https://docs.x.immutable.com/\">Immutable Docs</a>.</size>", 14);
+                           "More information on using the Immutable Unity SDK and APIs can be found at the <a href=\"https://docs.x.immutable.com/\">" +
+                           "Immutable Docs</a>.</size>", 14);
 
             DrawLine(Color.gray);
 

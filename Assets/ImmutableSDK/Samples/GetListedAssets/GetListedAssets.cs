@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using api.Api;
 using api.Client;
 using api.Model;
 using Sdk;
@@ -20,10 +19,19 @@ namespace ImmutableSDK.Samples.GetListedAssets
          private Transform listParent = null;
 
          [SerializeField]
+         private TMP_InputField nameInput = null;
+         
+         [SerializeField]
+         private TMP_InputField collectionInput = null;
+         
+         [SerializeField]
          private TMP_InputField pageInput = null;
          
          [SerializeField]
          private TMP_InputField userInput = null;
+
+         [SerializeField]
+         private TMP_Dropdown environmentDropdown = null;
 
          private List<AssetListObject> listedAssets = new List<AssetListObject>();
 
@@ -42,12 +50,17 @@ namespace ImmutableSDK.Samples.GetListedAssets
                  // Get a list of assets
                  int pageSize = 50;
                  int.TryParse(pageInput.text, out pageSize);
+
+                 Environment env = environmentDropdown.value == 0
+                     ? EnvironmentSelector.Sandbox
+                     : EnvironmentSelector.Mainnet;
     
                  // Create a client for sandbox assets and fetch
                  Client client = new Client(new Config() {
-                     Environment = EnvironmentSelector.Sandbox
+                     Environment = env
                  });
-                 ListAssetsResponse result = client.ListAssets(pageSize, null, null, null, userInput.text);
+                 ListAssetsResponse result = client.ListAssets(pageSize, null, null, null, userInput.text, 
+                     null, nameInput.text, null, null, null, null, collectionInput.text);
                  
                  Debug.Log(result.ToJson());
                  

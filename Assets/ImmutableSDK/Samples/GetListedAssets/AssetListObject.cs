@@ -39,7 +39,7 @@ namespace ImmutableSDK.Samples.GetListedAssets
         {
             collectionText.text = $"Collection: {asset.Collection.Name}";
             nameText.text = $"Name: {asset.Name}";
-            descText.text = $"Desc: {asset.Description}";
+            descText.text = $"Collection: {asset.Description}";
             createdText.text = $"Created: {asset.CreatedAt}";
             addressText.text = $"Address: {asset.TokenAddress}";
     

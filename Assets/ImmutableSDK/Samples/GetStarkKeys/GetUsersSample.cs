@@ -1,6 +1,7 @@
 using api.Api;
 using api.Client;
 using api.Model;
+using Sdk;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ namespace ImmutableSDK.Samples.GetStarkKeys
 
         [SerializeField]
         private TextMeshProUGUI userData = null;
+        
+        [SerializeField]
+        private TMP_Dropdown environmentDropdown = null;
 
         /// <summary>
         /// Looks up a user via a UserID and returns account information containing Stark Keys
@@ -27,11 +31,18 @@ namespace ImmutableSDK.Samples.GetStarkKeys
                 return; // No id input
             }
             
-            UsersApi usersInstance = new UsersApi();
-            
             try
             {
-                GetUsersApiResponse result = usersInstance.GetUsers(userInputField.text);
+                Environment env = environmentDropdown.value == 0
+                    ? EnvironmentSelector.Sandbox
+                    : EnvironmentSelector.Mainnet;
+    
+                // Create a client for sandbox assets and fetch
+                Client client = new Client(new Config() {
+                    Environment = env
+                });
+                
+                GetUsersApiResponse result = client.GetUsers(userInputField.text);
                 Debug.Log(result.ToJson());
 
                 string accounts = "";

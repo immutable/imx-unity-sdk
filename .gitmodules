@@ -1,0 +1,4 @@
+[submodule "imx-core-sdk-csharp"]
+	path = imx-core-sdk-csharp
+	url = https://github.com/immutable/imx-core-sdk-csharp
+	branch = dev

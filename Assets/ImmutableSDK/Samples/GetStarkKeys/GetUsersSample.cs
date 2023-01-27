@@ -1,7 +1,6 @@
-using api.Api;
-using api.Client;
-using api.Model;
-using Sdk;
+using Imx.Sdk;
+using Imx.Sdk.Gen.Client;
+using Imx.Sdk.Gen.Model;
 using TMPro;
 using UnityEngine;
 

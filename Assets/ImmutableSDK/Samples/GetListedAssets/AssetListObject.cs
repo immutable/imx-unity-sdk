@@ -1,5 +1,5 @@
 using System.Collections;
-using api.Model;
+using Imx.Sdk.Gen.Model;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;

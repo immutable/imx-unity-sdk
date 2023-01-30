@@ -84,7 +84,7 @@ namespace ImmutableSDK.Samples.GetListedAssets
 
                      if (!string.IsNullOrEmpty(userInput.text))
                      {
-                         message += "\nCheck user ID";
+                         message += "\nCheck wallet address";
                      }
                      
                      if (!string.IsNullOrEmpty(collectionInput.text))

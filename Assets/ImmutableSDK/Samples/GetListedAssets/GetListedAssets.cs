@@ -17,6 +17,9 @@ namespace ImmutableSDK.Samples.GetListedAssets
 
          [SerializeField]
          private Transform listParent = null;
+         
+         [SerializeField]
+         private TMP_Text noResultObject = null;
 
          [SerializeField]
          private TMP_InputField nameInput = null;
@@ -72,14 +75,36 @@ namespace ImmutableSDK.Samples.GetListedAssets
                  
                  listedAssets.Clear();
 
-                 // Populate UI list elements
-                 foreach (AssetWithOrders asset in result.Result)
+                 // Handle no result states
+                 noResultObject.gameObject.SetActive(result.Result.Count == 0);
+                 
+                 if (result.Result.Count == 0)
                  {
-                     AssetListObject newAsset = GameObject.Instantiate(assetObj, listParent);
-                     newAsset.gameObject.SetActive(true);
+                     string message = "No Results Found";
+
+                     if (!string.IsNullOrEmpty(userInput.text))
+                     {
+                         message += "\nCheck user ID";
+                     }
                      
-                     newAsset.Initialise(asset);
-                     listedAssets.Add(newAsset);
+                     if (!string.IsNullOrEmpty(collectionInput.text))
+                     {
+                         message += "\nCheck collection ID";
+                     }
+
+                     noResultObject.text = message;
+                 }
+                 else
+                 {
+                     // Populate UI list elements
+                     foreach (AssetWithOrders asset in result.Result)
+                     {
+                         AssetListObject newAsset = GameObject.Instantiate(assetObj, listParent);
+                         newAsset.gameObject.SetActive(true);
+                     
+                         newAsset.Initialise(asset);
+                         listedAssets.Add(newAsset);
+                     }
                  }
              }
              catch (ApiException  e)

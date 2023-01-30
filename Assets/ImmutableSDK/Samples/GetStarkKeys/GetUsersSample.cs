@@ -58,7 +58,7 @@ namespace ImmutableSDK.Samples.GetStarkKeys
                 Debug.Log("Status Code: " + e.ErrorCode);
                 Debug.Log(e.StackTrace);
                 
-                userData.text = "Status Code: " + e.ErrorCode;
+                userData.text = "No keys found, check input parameters";
             }
         }
     }

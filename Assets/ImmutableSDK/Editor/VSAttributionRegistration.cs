@@ -15,16 +15,37 @@ namespace ImmutableSDK.Editor
 
         protected void OnEnable()
         {
+            Debug.Log("OnEnable");
+            // Save the open window state in case a re-compile/load occurs to prevent multiple windows
+            vsRegState.isOpen = true;
+            SaveVSRegState();
             // Retrieve existing data if already registered to prevent sending multiple events
-            var data = EditorPrefs.GetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
-            JsonUtility.FromJsonOverwrite(data, vsRegState);
+            LoadVSRegState();
         }
 
-        protected void OnDisable()
+        protected void OnDestroy()
         {
+            Debug.Log("OnDestroy"); //test
+            vsRegState.isOpen = false;
             // Save entered data on exit
-            var data = JsonUtility.ToJson(vsRegState, false);
-            EditorPrefs.SetString("VSAttributionRegistration", data);
+            SaveVSRegState();
+        }
+
+        /// <summary>
+        /// Saves the current state of VSAttributionRegistrationState to EditorPrefs
+        /// </summary>
+        void SaveVSRegState()
+        {
+            EditorPrefs.SetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
+        }
+
+        /// <summary>
+        /// Load the saved state of VSAttributionRegistrationState from EditorPrefs
+        /// </summary>
+        void LoadVSRegState()
+        {
+            var data = EditorPrefs.GetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
+            JsonUtility.FromJsonOverwrite(data, vsRegState);
         }
 
         public void OnGUI()
@@ -64,7 +85,7 @@ namespace ImmutableSDK.Editor
                 if (result == AnalyticsResult.Ok)
                 {
                     vsRegState.submitted = true;
-                    GetWindow<VSAttributionRegistration>().Close();
+                    GetWindow<VSAttributionRegistration>().Close(); // this will trigger OnDestroy()
                 }
             }
         }
@@ -84,6 +105,7 @@ namespace ImmutableSDK.Editor
         {
             [SerializeField] public string customerUid;
             [SerializeField] public bool submitted;
+            [SerializeField] public bool isOpen;
         }
 
         #region Utilities

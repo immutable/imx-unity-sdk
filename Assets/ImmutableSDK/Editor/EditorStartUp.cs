@@ -12,18 +12,10 @@ namespace ImmutableSDK.Editor
             var data = EditorPrefs.GetString("VSAttributionRegistration");
             VSAttributionRegistration.VSAttributionRegistrationState vsRegState = new();
             JsonUtility.FromJsonOverwrite(data, vsRegState);
-            // If the form has not been submitted, initialize and pop up the editor window
-            if (!vsRegState.submitted)
+            // If the form has not been submitted, initialize and pop up the editor window if not already open
+            if (!vsRegState.submitted && !EditorWindow.HasOpenInstances<VSAttributionRegistration>())
             {
-                // Check if custom editor window is already open and act accordingly
-                if (!vsRegState.isOpen)
-                {
-                    VSAttributionRegistration.Initialize();
-                }
-                else
-                {
-                    VSAttributionRegistration.FocusWindowIfItsOpen<VSAttributionRegistration>();
-                }
+                VSAttributionRegistration.Initialize();
             }
         }
     }

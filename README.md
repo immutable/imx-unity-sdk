@@ -26,6 +26,13 @@ This package is in development and contains functionality to read from Immutable
 Download the `.unitypackage` file from the Releases page and drag it into the `Assets/` window of an open project in the Unity Editor. 
 Alternatively, you can double click the Unity package file to open it and then follow the UPM installation instructions.
 
+### Registering with the Unity VS Team
+
+It's highly recommended to register your Immutable Unity SDK installation with the Unity Verified Solutions team in case support is required.
+
+To do so, from within the Unity Editor select `Immutable > Immutable Unity SDK` from the top navigation window. In the window that opens, enter your 
+email address and click submit.
+
 ## Examples
 
 Two samples are provided to showcase some of the functionality such as fetching assets on IMX and getting user data.

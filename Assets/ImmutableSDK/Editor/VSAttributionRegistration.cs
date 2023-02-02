@@ -13,7 +13,7 @@ namespace ImmutableSDK.Editor
         private static readonly Vector2 s_WindowSize = new(MAX_WIDTH, MAX_HEIGHT);
         private readonly string RELATIVE_EDITOR_DIR = "Assets/ImmutableSDK/Editor/";
         private readonly string PACKAGED_RELATIVE_EDITOR_DIR = "Editor/";
-        private readonly string IMX_LOGO_FILENAME = "immutablex-logo.png";
+        private readonly string IMX_LOGO_FILENAME = "ImmutableXLogo.png";
 
         private readonly VSAttributionRegistrationState vsRegState = new();
 
@@ -32,9 +32,9 @@ namespace ImmutableSDK.Editor
         public void OnGUI()
         {
             // Simple custom EditorWindow for users to register with VS based on the Unity VSAttribution example
-            var banner = (Texture)AssetDatabase.LoadAssetAtPath(RELATIVE_EDITOR_DIR + IMX_LOGO_FILENAME, typeof(Texture));
+            var banner = (Texture)AssetDatabase.LoadAssetAtPath(RELATIVE_EDITOR_DIR + "Art/" + IMX_LOGO_FILENAME, typeof(Texture));
             // Fallback for package .tar.gz installations
-            if (banner == null) banner = (Texture)AssetDatabase.LoadAssetAtPath(PACKAGED_RELATIVE_EDITOR_DIR + IMX_LOGO_FILENAME, typeof(Texture));
+            if (banner == null) banner = (Texture)AssetDatabase.LoadAssetAtPath(PACKAGED_RELATIVE_EDITOR_DIR + "Art/" + IMX_LOGO_FILENAME, typeof(Texture));
 
             GUILayout.Box(banner, GUILayout.MaxHeight(MAX_HEIGHT), GUILayout.MaxWidth(MAX_WIDTH));
 

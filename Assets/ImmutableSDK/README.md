@@ -35,6 +35,8 @@ These examples can be found in `ImmutableSDK/Samples`.
 This example shows how to fetch assets and apply filters to get results.
 
 Load ListedAssets.unity as the active scene. If you do not have Text Mesh Pro set up, you will recieve a popup and can click to import TMP essentials.
+Some assets listed on IMX can use ascii characters not found in the font packs, to avoid Text Mesh Pro throwing warnings you can disable the `Disable warnings` flag in TMP settings scriptable object.
+The TMP settings by default is stored in `Assets/TextMesh Pro/Resources`
 
 Hit play and you should get an empty list with input fields and a FETCH button. Clicking the fetch button will fetch assets from immutable sandbox and display them in the list, this may take a few seconds to populate.
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mail;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Analytics;
@@ -10,29 +11,31 @@ namespace ImmutableSDK.Editor
         private static readonly int MAX_HEIGHT = 460;
         private static readonly int MAX_WIDTH = 500;
         private static readonly Vector2 s_WindowSize = new(MAX_WIDTH, MAX_HEIGHT);
+        private readonly string RELATIVE_EDITOR_DIR = "Assets/ImmutableSDK/Editor/";
+        private readonly string PACKAGED_RELATIVE_EDITOR_DIR = "Editor/";
+        private readonly string IMX_LOGO_FILENAME = "immutablex-logo.png";
 
         private readonly VSAttributionRegistrationState vsRegState = new();
 
         protected void OnEnable()
         {
             // Retrieve existing data if already registered to prevent sending multiple events
-            var data = EditorPrefs.GetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
-            JsonUtility.FromJsonOverwrite(data, vsRegState);
+            LoadVSRegState();
         }
 
-        protected void OnDisable()
+        protected void OnDestroy()
         {
             // Save entered data on exit
-            var data = JsonUtility.ToJson(vsRegState, false);
-            EditorPrefs.SetString("VSAttributionRegistration", data);
+            SaveVSRegState();
         }
 
         public void OnGUI()
         {
             // Simple custom EditorWindow for users to register with VS based on the Unity VSAttribution example
-            var banner =
-                (Texture)AssetDatabase.LoadAssetAtPath("Assets/ImmutableSDK/Editor/immutablex-logo.png",
-                    typeof(Texture));
+            var banner = (Texture)AssetDatabase.LoadAssetAtPath(RELATIVE_EDITOR_DIR + IMX_LOGO_FILENAME, typeof(Texture));
+            // Fallback for package .tar.gz installations
+            if (banner == null) banner = (Texture)AssetDatabase.LoadAssetAtPath(PACKAGED_RELATIVE_EDITOR_DIR + IMX_LOGO_FILENAME, typeof(Texture));
+
             GUILayout.Box(banner, GUILayout.MaxHeight(MAX_HEIGHT), GUILayout.MaxWidth(MAX_WIDTH));
 
             DrawLine(Color.gray);
@@ -58,15 +61,47 @@ namespace ImmutableSDK.Editor
 
             if (GUILayout.Button("Register"))
             {
+                if (vsRegState.customerUid == null || vsRegState.customerUid.Length == 0 ||
+                    !IsValidEmail(vsRegState.customerUid))
+                {
+                    EditorUtility.DisplayDialog("Validation Error!", "Please enter a valid email address!", "OK");
+                    return;
+                }
+
+                if (vsRegState.submitted)
+                {
+                    EditorUtility.DisplayDialog("Already registered!",
+                        "This instance of the Immutable Unity SDK has already been registered!", "Close");
+                    GetWindow<VSAttributionRegistration>().Close(); // this will trigger OnDestroy()
+                    return;
+                }
+
                 var result = VSAttribution.SendAttributionEvent("ImmutableUnitySDKRegistration", "Immutable",
                     vsRegState.customerUid);
                 Debug.Log("[Immutable Unity SDK] Registration Successful!");
                 if (result == AnalyticsResult.Ok)
                 {
                     vsRegState.submitted = true;
-                    GetWindow<VSAttributionRegistration>().Close();
+                    GetWindow<VSAttributionRegistration>().Close(); // this will trigger OnDestroy()
                 }
             }
+        }
+
+        /// <summary>
+        ///     Saves the current state of VSAttributionRegistrationState to EditorPrefs
+        /// </summary>
+        private void SaveVSRegState()
+        {
+            EditorPrefs.SetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
+        }
+
+        /// <summary>
+        ///     Load the saved state of VSAttributionRegistrationState from EditorPrefs
+        /// </summary>
+        private void LoadVSRegState()
+        {
+            var data = EditorPrefs.GetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
+            JsonUtility.FromJsonOverwrite(data, vsRegState);
         }
 
         [MenuItem("Immutable/Immutable Unity SDK Registration")]
@@ -102,6 +137,26 @@ namespace ImmutableSDK.Editor
             r.x -= 2;
             r.width += 6;
             EditorGUI.DrawRect(r, color);
+        }
+
+        /// <summary>
+        ///     Basic email validation function using System.Net.Mail
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        private static bool IsValidEmail(string email)
+        {
+            var valid = true;
+            try
+            {
+                var mailAddress = new MailAddress(email);
+            }
+            catch
+            {
+                valid = false;
+            }
+
+            return valid;
         }
 
         #endregion

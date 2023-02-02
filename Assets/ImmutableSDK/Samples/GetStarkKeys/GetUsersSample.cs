@@ -44,7 +44,7 @@ namespace ImmutableSDK.Samples.GetStarkKeys
                 GetUsersApiResponse result = client.GetUsers(userInputField.text);
                 Debug.Log(result.ToJson());
 
-                string accounts = "";
+                string accounts = "User Stark Keys:\n";
                 for (int i = 0; i < result.Accounts.Count; i++)
                 {
                     accounts += result.Accounts[i] + "\n";

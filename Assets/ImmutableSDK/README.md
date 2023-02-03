@@ -54,10 +54,3 @@ Load GetStarkKeys.unity and press play.
 
 You will receive an input field and fetch button, you will need to enter a user ID on IMX, click fetch and the user data field will populate with account keys for that user.
 You have access to an environment toggle to fetch on sandbox or main net.
-
-## Local Development & Contributions
-
-If you'd like to contribute to this package or run the project locally, simply clone the repository 
-and import the project into Unity.
-
-See [CONTRIBUTING.md](https://github.com/immutable/imx-unity-sdk/blob/main/CONTRIBUTING.md) for details on PR expectations.

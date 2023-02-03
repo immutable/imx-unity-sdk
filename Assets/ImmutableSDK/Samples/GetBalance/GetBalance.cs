@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,103 +7,119 @@ using TMPro;
 using UnityEngine;
 using Environment = Imx.Sdk.Environment;
 
-public class GetBalance : MonoBehaviour
+namespace ImmutableSDK.Samples.GetBalance
 {
-    [SerializeField]
-    private TMP_Dropdown environmentDropdown = null;
-    
-    [SerializeField]
-    private TMP_Dropdown tokenDropdown = null;
-    
-    [SerializeField]
-    private TMP_InputField ownerInput = null;
-    
-    [SerializeField]
-    private TMP_InputField addressInput = null;
-
-    [SerializeField] 
-    private TMP_Text loadingText = null;
-
-    [SerializeField]
-    private TMP_Text resultText = null;
-    
-    private List<Balance> userBalances = new List<Balance>();
-
-    private void Awake()
+    /// <summary>
+    /// Fetches the balances for a user wallet and displays the available tokens and balances
+    /// </summary>
+    public class GetBalance : MonoBehaviour
     {
-        tokenDropdown.onValueChanged.AddListener((T0) => DisplaySelectedBalance());
-    }
+        [SerializeField]
+        private TMP_Dropdown environmentDropdown = null;
+    
+        [SerializeField]
+        private TMP_Dropdown tokenDropdown = null;
+    
+        [SerializeField]
+        private TMP_InputField ownerInput = null;
 
-    private void UpdateTokenDropdown()
-    {
-        if (userBalances == null || userBalances.Count == 0)
+        [SerializeField]
+        private TMP_Text resultText = null;
+    
+        private List<Balance> userBalances = new List<Balance>();
+
+        private void Awake()
         {
-            // No tokens owned, clear list
-            tokenDropdown.options = new List<TMP_Dropdown.OptionData>();
+            // Update balance text whenever user changes token type
+            tokenDropdown.onValueChanged.AddListener((T0) => DisplaySelectedBalance());
+        }
+
+        /// <summary>
+        /// Updates the token options based on available tokens in the user wallet
+        /// </summary>
+        private void UpdateTokenDropdown()
+        {
+            if (userBalances == null || userBalances.Count == 0)
+            {
+                // No tokens owned, clear list
+                tokenDropdown.options = new List<TMP_Dropdown.OptionData>();
+                resultText.text = "No balances to display";
+                return;
+            }
+
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+
+            for (int i = 0; i < userBalances.Count; i++)
+            {
+                options.Add(new TMP_Dropdown.OptionData(userBalances[i].Symbol));
+            }
+
+            tokenDropdown.options = options;
             DisplaySelectedBalance();
-            return;
         }
 
-        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-
-        for (int i = 0; i < userBalances.Count; i++)
+        /// <summary>
+        /// Display the current balance for a token, or notify that there are no balances are available
+        /// </summary>
+        private void DisplaySelectedBalance()
         {
-            options.Add(new TMP_Dropdown.OptionData(userBalances[i].Symbol));
+            if (tokenDropdown.value < 0 || userBalances.Count == 0)
+            {
+                resultText.text = "No balances to display";
+                return;
+            }
+        
+            Balance selectedBalance = userBalances[tokenDropdown.value];
+        
+            // Update ui
+            resultText.text = $"Current wallet balance for {selectedBalance.Symbol}:\n" +
+                              $"Wei Balance: {selectedBalance._Balance}\n" +
+                              $"Withdrawable: {selectedBalance.Withdrawable}";
         }
 
-        tokenDropdown.options = options;
-        DisplaySelectedBalance();
-    }
-
-    private void DisplaySelectedBalance()
-    {
-        if (tokenDropdown.value < 0 || userBalances.Count == 0)
+        /// <summary>
+        /// Public entry point to fetch and update balances to ui
+        /// </summary>
+        public void FetchBalance()
         {
-            resultText.text = $"No balances to display";
-            return;
+            StartCoroutine(GetBalanceAsync());
         }
-        
-        Balance selectedBalance = userBalances[tokenDropdown.value];
-        
-        // Update ui
-        resultText.text = $"Current wallet balance for {selectedBalance.Symbol}:\n" +
-                          $"Wei Balance: {selectedBalance._Balance}\n" +
-                          $"Withdrawable: {selectedBalance.Withdrawable}";
-    }
 
-    public void FetchBalance()
-    {
-        StartCoroutine(GetBalanceAsync());
-    }
-
-    private IEnumerator GetBalanceAsync()
-    {
-        userBalances.Clear();
+        /// <summary>
+        /// Fetches balances async and triggers a ui update
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator GetBalanceAsync()
+        {
+            userBalances.Clear();
         
-        Environment env = environmentDropdown.value == 0
-            ? EnvironmentSelector.Sandbox
-            : EnvironmentSelector.Mainnet;
+            Environment env = environmentDropdown.value == 0
+                ? EnvironmentSelector.Sandbox
+                : EnvironmentSelector.Mainnet;
     
-        // Create a client
-        Client client = new Client(new Config() {
-            Environment = env
-        });
+            // Create a client
+            Client client = new Client(new Config() {
+                Environment = env
+            });
         
-        Task<ListBalancesResponse> listBalances = client.ListBalancesAsync(ownerInput.text);
-        resultText.text = "Fetching Balances...";
+            Task<ListBalancesResponse> listBalances = client.ListBalancesAsync(ownerInput.text);
+            
+            // Display async loading to user while operation finishes
+            resultText.text = "Fetching Balances...";
         
-        while (!listBalances.IsCompleted)
-        {
-            yield return null;
-        }
+            while (!listBalances.IsCompleted)
+            {
+                yield return null;
+            }
         
-        resultText.text = "";
+            resultText.text = "";
         
-        if (listBalances.Result != null)
-        {
-            userBalances = listBalances.Result.Result;
-        }
+            if (listBalances.Result != null)
+            {
+                userBalances = listBalances.Result.Result;
+            }
 
-        UpdateTokenDropdown();
+            UpdateTokenDropdown();
+        }
     }
 }

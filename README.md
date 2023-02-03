@@ -1,5 +1,3 @@
-This SDK is currently a work in progress, and should not be used to integrate with the Immutable platform.
-
 <div align="center">
   <p align="center">
     <a  href="https://docs.x.immutable.com/docs">

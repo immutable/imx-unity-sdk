@@ -28,7 +28,7 @@ Alternatively, you can double click the Unity package file to open it and then f
 
 ## Examples
 
-Two samples are provided to showcase some of the functionality such as fetching assets on IMX and getting user data.
+Three samples are provided to showcase some of the functionality such as fetching assets on IMX and getting user data.
 These examples can be found in `ImmutableSDK/Samples`.
 
 ### 1. GetListedAssets
@@ -48,9 +48,16 @@ User ID allows you to filter by specific user assets.
 Environment lets you choose between sandbox or main net assets.
 
 ### 2. GetStarkKeys
-This examples shows how to fetch stark keys from a user wallet ID for operations.
+This example shows how to fetch stark keys from a user wallet ID for operations.
 
 Load GetStarkKeys.unity and press play.
 
 You will receive an input field and fetch button, you will need to enter a user ID on IMX, click fetch and the user data field will populate with account keys for that user.
 You have access to an environment toggle to fetch on sandbox or main net.
+
+### 3. GetBalance
+This example shows how to get the balances from a user wallet, and filter by token type.
+
+Load GetBalance.unity and press play.
+
+You have a user wallet address input field for a public wallet key, and an environment dropdown if the balances are on sandbox or main net environments. Clicking Get Balance will return if a user has balances in that environment, and if so the token dropdown will populate with what tokens are in the wallet. Different tokens to view can be selected through the dropdown

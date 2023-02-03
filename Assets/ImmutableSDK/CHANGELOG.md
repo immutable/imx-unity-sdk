@@ -2,6 +2,7 @@
 ## Added
 * Branding assets added to Unity Demos
 * Signup screen should popup automatically if emails have not been registered
+* Third demo added to fetch and display user balances
 
 ## Changed
 * Registration should popup automatically along with still being accessible through editor dropdown

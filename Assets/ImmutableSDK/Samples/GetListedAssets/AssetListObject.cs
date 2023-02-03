@@ -44,7 +44,7 @@ namespace ImmutableSDK.Samples.GetListedAssets
             addressText.text = $"Address: {asset.TokenAddress}";
     
             // Lookup collection image
-            if (!string.IsNullOrEmpty(asset.Collection.IconUrl))
+            if (!string.IsNullOrEmpty(asset.Collection.IconUrl) && asset.Collection.IconUrl.Contains("https"))
             {
                 StartCoroutine(DownloadImage(asset.Collection.IconUrl));
             }
@@ -61,10 +61,10 @@ namespace ImmutableSDK.Samples.GetListedAssets
         IEnumerator DownloadImage(string MediaUrl)
         {   
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+
             yield return request.SendWebRequest();
             if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.Log(request.error);
                 collectionText.gameObject.SetActive(true);
                 collectionImage.gameObject.SetActive(false);
             }

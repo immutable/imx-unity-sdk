@@ -824,7 +824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Token
+  m_text: Owned Tokens
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9f76506e1b9fb5418532b0dac7fad2b, type: 2}
   m_sharedMaterial: {fileID: -283092778394692687, guid: d9f76506e1b9fb5418532b0dac7fad2b, type: 2}
@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Owner...
+  m_text: User Wallet Address...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9f76506e1b9fb5418532b0dac7fad2b, type: 2}
   m_sharedMaterial: {fileID: -283092778394692687, guid: d9f76506e1b9fb5418532b0dac7fad2b, type: 2}
@@ -4039,8 +4039,6 @@ MonoBehaviour:
   environmentDropdown: {fileID: 952178772}
   tokenDropdown: {fileID: 1694154190}
   ownerInput: {fileID: 567740321}
-  addressInput: {fileID: 0}
-  loadingText: {fileID: 0}
   resultText: {fileID: 1085488557}
 --- !u!1 &1736181982
 GameObject:

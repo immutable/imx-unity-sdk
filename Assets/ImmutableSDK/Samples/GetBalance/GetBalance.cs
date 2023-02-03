@@ -28,46 +28,48 @@ public class GetBalance : MonoBehaviour
     [SerializeField]
     private TMP_Text resultText = null;
     
-    [SerializeField]
-    private TMP_Text addressText = null;
+    private List<Balance> userBalances = new List<Balance>();
 
-    private List<string> tokenAddresses = new List<string>();
-
-    private void Start()
+    private void Awake()
     {
-        UpdateTokenDropdown();
-        environmentDropdown.onValueChanged.AddListener((T0) => UpdateTokenDropdown());
+        tokenDropdown.onValueChanged.AddListener((T0) => DisplaySelectedBalance());
     }
 
     private void UpdateTokenDropdown()
     {
-        Environment env = environmentDropdown.value == 0
-            ? EnvironmentSelector.Sandbox
-            : EnvironmentSelector.Mainnet;
-        
-        tokenAddresses.Clear();
-    
-        // Create a client
-        Client client = new Client(new Config() {
-            Environment = env
-        });
-
-        var result = client.ListTokens();
-        
-        // Update ui
-        string resultString = "";
-        List<TMP_Dropdown.OptionData> tokenOptions = new List<TMP_Dropdown.OptionData>();
-        
-        for (int i = 0; i < result.Result.Count; i++)
+        if (userBalances == null || userBalances.Count == 0)
         {
-            resultString += $"{result.Result[i].Name}: {result.Result[i].TokenAddress}\n";
-            tokenOptions.Add(new TMP_Dropdown.OptionData(result.Result[i].Name));
-            tokenAddresses.Add(result.Result[i].TokenAddress);
+            // No tokens owned, clear list
+            tokenDropdown.options = new List<TMP_Dropdown.OptionData>();
+            DisplaySelectedBalance();
+            return;
+        }
+
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+
+        for (int i = 0; i < userBalances.Count; i++)
+        {
+            options.Add(new TMP_Dropdown.OptionData(userBalances[i].Symbol));
+        }
+
+        tokenDropdown.options = options;
+        DisplaySelectedBalance();
+    }
+
+    private void DisplaySelectedBalance()
+    {
+        if (tokenDropdown.value < 0 || userBalances.Count == 0)
+        {
+            resultText.text = $"No balances to display";
+            return;
         }
         
-        Debug.Log(resultString);
-
-        tokenDropdown.options = tokenOptions;
+        Balance selectedBalance = userBalances[tokenDropdown.value];
+        
+        // Update ui
+        resultText.text = $"Current wallet balance for {selectedBalance.Symbol}:\n" +
+                          $"Wei Balance: {selectedBalance._Balance}\n" +
+                          $"Withdrawable: {selectedBalance.Withdrawable}";
     }
 
     public void FetchBalance()
@@ -77,6 +79,8 @@ public class GetBalance : MonoBehaviour
 
     private IEnumerator GetBalanceAsync()
     {
+        userBalances.Clear();
+        
         Environment env = environmentDropdown.value == 0
             ? EnvironmentSelector.Sandbox
             : EnvironmentSelector.Mainnet;
@@ -85,26 +89,22 @@ public class GetBalance : MonoBehaviour
         Client client = new Client(new Config() {
             Environment = env
         });
-
-        Task<Balance> balanceTask = client.GetBalanceAsync(ownerInput.text, tokenAddresses[tokenDropdown.value]);
-
-        // Show loading state
-        loadingText.gameObject.SetActive(true);
-
-        // Wait on method to complete
-        while (!balanceTask.IsCompleted)
+        
+        Task<ListBalancesResponse> listBalances = client.ListBalancesAsync(ownerInput.text);
+        resultText.text = "Fetching Balances...";
+        
+        while (!listBalances.IsCompleted)
         {
             yield return null;
         }
         
-        // End loading state
-        loadingText.gameObject.SetActive(false);
+        resultText.text = "";
         
-        Debug.Log(balanceTask.Result.ToJson());
-        
-        // Update ui
-        resultText.text = balanceTask.Result.ToString();
+        if (listBalances.Result != null)
+        {
+            userBalances = listBalances.Result.Result;
+        }
 
-        yield return null;
+        UpdateTokenDropdown();
     }
 }

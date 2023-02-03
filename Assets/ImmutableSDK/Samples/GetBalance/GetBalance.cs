@@ -91,6 +91,11 @@ namespace ImmutableSDK.Samples.GetBalance
         /// <returns></returns>
         private IEnumerator GetBalanceAsync()
         {
+            if (string.IsNullOrEmpty(ownerInput.text))
+            {
+                yield break;
+            }
+            
             userBalances.Clear();
         
             Environment env = environmentDropdown.value == 0

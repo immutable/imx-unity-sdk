@@ -19,7 +19,7 @@ Samples require TextMeshPro to use interactive UI examples.
 The Immutable Core SDK C# requires several third party .DLL files that have been added to the plugins folder.
 
 ## Getting Started
-This package is in development and contains functionality to read from ImmutableX API endpoints.
+This package is in development and currently contains functionality to read from ImmutableX API endpoints.
 
 ### Installation
 

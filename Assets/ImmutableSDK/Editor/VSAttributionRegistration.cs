@@ -14,17 +14,20 @@ namespace ImmutableSDK.Editor
         private readonly string RELATIVE_EDITOR_DIR = "Assets/ImmutableSDK/Editor/";
         private readonly string PACKAGED_RELATIVE_EDITOR_DIR = "Editor/";
         private readonly string IMX_LOGO_FILENAME = "ImmutableXLogo.png";
+        private static readonly string PRODUCT_VERSION = "0.1.2";
 
         private readonly VSAttributionRegistrationState vsRegState = new();
 
         protected void OnEnable()
         {
+            Debug.Log("OnEnable");
             // Retrieve existing data if already registered to prevent sending multiple events
             LoadVSRegState();
         }
 
         protected void OnDestroy()
         {
+            Debug.Log("OnDestroy");
             // Save entered data on exit
             SaveVSRegState();
         }
@@ -92,7 +95,7 @@ namespace ImmutableSDK.Editor
         /// </summary>
         private void SaveVSRegState()
         {
-            EditorPrefs.SetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
+            EditorPrefs.SetString(GetEditorPrefsKey(), JsonUtility.ToJson(vsRegState, false));
         }
 
         /// <summary>
@@ -100,8 +103,19 @@ namespace ImmutableSDK.Editor
         /// </summary>
         private void LoadVSRegState()
         {
-            var data = EditorPrefs.GetString("VSAttributionRegistration", JsonUtility.ToJson(vsRegState, false));
+            var data = EditorPrefs.GetString(GetEditorPrefsKey(), JsonUtility.ToJson(vsRegState, false));
             JsonUtility.FromJsonOverwrite(data, vsRegState);
+        }
+
+        /// <summary>
+        ///     Returns a unique project key used to save the state of VSA form submission via EditorPrefs
+        /// </summary>
+        /// <returns>A unique project key used for form state storage in EditorPrefs</returns>
+        public static string GetEditorPrefsKey()
+        {
+            Debug.Log("GetEditorPrefsKey");
+            string productGuid = PlayerSettings.productGUID != null ? PlayerSettings.productGUID.ToString() : "";
+            return "ImxVSRegAttr-" + PRODUCT_VERSION + "-" + productGuid;
         }
 
         [MenuItem("Immutable/Immutable Unity SDK Registration")]

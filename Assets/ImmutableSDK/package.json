@@ -1,6 +1,6 @@
 {
   "name": "com.immutable.unitysdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "displayName": "Immutable Unity SDK",
   "description": "The Immutable Unity SDK allows game developers to integrate their web3 game with ImmutableX, the leading layer 2 for NFT, secured by Ethereum. Through the SDK, developers can read blockchain state for any immutable wallet right from the Unity client",
   "unity": "2022.2",

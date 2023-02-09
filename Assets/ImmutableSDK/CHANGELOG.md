@@ -1,3 +1,14 @@
+# [0.1.2] - 2023-02-09
+## Added
+
+## Changed
+* C# SDK .dll files updated to remove endpoints in development
+* Expanded documentation in Readme including links to external hosted docs
+* Demos updated to use default wallets to ease testing
+
+## Fixed
+* Updates to VS attribution to make window popups more consistent
+
 # [0.1.1] - 2023-02-03
 ## Added
 * Branding assets added to Unity Demos

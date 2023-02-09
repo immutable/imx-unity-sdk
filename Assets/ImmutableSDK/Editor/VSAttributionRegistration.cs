@@ -20,14 +20,12 @@ namespace ImmutableSDK.Editor
 
         protected void OnEnable()
         {
-            Debug.Log("OnEnable");
             // Retrieve existing data if already registered to prevent sending multiple events
             LoadVSRegState();
         }
 
         protected void OnDestroy()
         {
-            Debug.Log("OnDestroy");
             // Save entered data on exit
             SaveVSRegState();
         }
@@ -113,7 +111,6 @@ namespace ImmutableSDK.Editor
         /// <returns>A unique project key used for form state storage in EditorPrefs</returns>
         public static string GetEditorPrefsKey()
         {
-            Debug.Log("GetEditorPrefsKey");
             string productGuid = PlayerSettings.productGUID != null ? PlayerSettings.productGUID.ToString() : "";
             return "ImxVSRegAttr-" + PRODUCT_VERSION + "-" + productGuid;
         }

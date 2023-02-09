@@ -17,6 +17,8 @@ Currently, the C# Core SDK provides this ***read-only*** functionality.
 * Users: Get
 * Tokens: Get & List
 
+A roadmap of remaining features is in the package root for upcoming development.
+
 ## Additional Documentation
 * Get started building on ImmutableX with the [Developer docs](https://docs.x.immutable.com/docs/welcome/)
 * Check out the [API reference documentation](https://docs.x.immutable.com/reference)

@@ -1,10 +1,7 @@
 <div align="center">
-  <p align="center">
+  <p>
     <a  href="https://docs.x.immutable.com/docs">
       <img src="https://cdn.dribbble.com/users/1299339/screenshots/7133657/media/837237d447d36581ebd59ec36d30daea.gif" width="280"/>
-    </a>
-    <a href="https://unity.com">
-      <img src="https://cdn.fs.brandfolder.com/bx0Rp4uvSMSnwZdx0iOR" width="280" />
     </a>
   </p>
 </div>
@@ -66,3 +63,8 @@ If you'd like to contribute to this package or run the project locally, simply c
 and import the project into Unity.
 
 See [CONTRIBUTING.md](https://github.com/immutable/imx-unity-sdk/blob/main/CONTRIBUTING.md) for details on PR expectations.
+
+## Roadmap
+<div>
+      <img src="https://user-images.githubusercontent.com/96668470/217699376-86d904c2-3355-4e9a-bb34-feae034e8494.png" width="1200"/>
+</div>

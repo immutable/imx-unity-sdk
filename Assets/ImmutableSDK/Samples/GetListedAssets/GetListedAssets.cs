@@ -38,9 +38,16 @@ namespace ImmutableSDK.Samples.GetListedAssets
 
          private List<AssetListObject> listedAssets = new List<AssetListObject>();
 
+         private const string defaultCollectionAddress = "0x6ac5097f3fab829bae5462cb217133bc3c2a096e"; // Default address to a collection
+         private const string defaultWalletAddress = "0x5A7CB0ba4D94b6B08B837E4e97A90b9F2400C80D"; // Default address for a wallet
+
          private void Awake()
          {
              assetObj.gameObject.SetActive(false);
+             
+             // Populate defaults
+             collectionInput.text = defaultCollectionAddress;
+             userInput.text = defaultWalletAddress;
          }
 
          /// <summary>

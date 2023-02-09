@@ -30,6 +30,10 @@ Alternatively, you can double click the Unity package file to open it and then f
 
 Three samples are provided to showcase some of the functionality such as fetching assets on IMX and getting user data.
 These examples can be found in `ImmutableSDK/Samples`.
+Demos use the below example wallets to auto fill that can be used for testing:
+0xF652A8bCb0Df65AE5fEd91DECaA8B591caeD1e1c
+0x5A7CB0ba4D94b6B08B837E4e97A90b9F2400C80D
+0x2d0ad946788938B9044ed72b1C464e1e9bb9d401
 
 ### 1. GetListedAssets
 This example shows how to fetch assets and apply filters to get results.
@@ -38,7 +42,7 @@ Load ListedAssets.unity as the active scene. If you do not have Text Mesh Pro se
 Some assets listed on IMX can use ascii characters not found in the font packs, to avoid Text Mesh Pro throwing warnings you can disable the `Disable warnings` flag in TMP settings scriptable object.
 The TMP settings by default is stored in `Assets/TextMesh Pro/Resources`
 
-Hit play and you should get an empty list with input fields and a FETCH button. Clicking the fetch button will fetch assets from immutable sandbox and display them in the list, this may take a few seconds to populate.
+Hit play and you should recieve pre populated inputs to view a Gods Unchained player wallet. Click fetch to view all the NFTs they own for that collection in their wallet.
 
 Below you can modify several query parameters to view assets on ImmutableX marketplace:
 Name will allow you to filter by NFT name.
@@ -52,7 +56,7 @@ This example shows how to fetch stark keys from a user wallet ID for operations.
 
 Load GetStarkKeys.unity and press play.
 
-You will receive an input field and fetch button, you will need to enter a user ID on IMX, click fetch and the user data field will populate with account keys for that user.
+You will receive an input field and fetch button alongside a pre-populated wallet address on main net. Press Get Stark Keys to view the L2 keys for this wallet.
 You have access to an environment toggle to fetch on sandbox or main net.
 
 ### 3. GetBalance
@@ -60,4 +64,4 @@ This example shows how to get the balances from a user wallet, and filter by tok
 
 Load GetBalance.unity and press play.
 
-You have a user wallet address input field for a public wallet key, and an environment dropdown if the balances are on sandbox or main net environments. Clicking Get Balance will return if a user has balances in that environment, and if so the token dropdown will populate with what tokens are in the wallet. Different tokens to view can be selected through the dropdown
+A user wallet will be pre-populated, clicking get balance will return their ETH balance on main net as wei.

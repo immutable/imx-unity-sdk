@@ -15,7 +15,7 @@ namespace ImmutableSDK.Editor
         private readonly string PACKAGED_RELATIVE_EDITOR_DIR = "Editor/";
         private readonly string IMX_LOGO_FILENAME = "ImmutableXLogo.png";
         private static readonly string PRODUCT_GUID = PlayerSettings.productGUID != null ? PlayerSettings.productGUID.ToString() : "";
-        private static readonly string PRODUCT_VERSION = "0.1.1";
+        private static readonly string PRODUCT_VERSION = "0.1.2";
         public static readonly string EDITOR_PREFS_KEY = "ImxVSRegAttr-" + PRODUCT_VERSION + "-" + PRODUCT_GUID;
 
         private readonly VSAttributionRegistrationState vsRegState = new();

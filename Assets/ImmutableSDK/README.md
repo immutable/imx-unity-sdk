@@ -30,7 +30,7 @@ Alternatively, you can double click the Unity package file to open it and then f
 
 It's highly recommended to register your Immutable Unity SDK installation with the Unity Verified Solutions team in case support is required.
 
-To do so, from within the Unity Editor select `Immutable > Immutable Unity SDK` from the top navigation window after installing the plugin). In the window that opens, enter your 
+To do so, from within the Unity Editor select `Immutable > Immutable Unity SDK` from the top navigation window after installing the plugin. In the window that opens, enter your 
 email address and click submit.
 
 

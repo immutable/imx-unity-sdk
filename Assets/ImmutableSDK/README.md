@@ -1,5 +1,5 @@
 # Immutable Unity SDK
-The Immutable Unity SDK package provides access to ImmutableX API endpoints from within Unity projects using the Immutable Core SDK in C#.
+The Immutable Unity SDK package provides access to ImmutableX API endpoints from within Unity projects using the [Immutable Core SDK in C#](https://docs.x.immutable.com/sdk-docs/core-sdk-csharp/overview).
 
 Currently, the C# Core SDK provides this ***read-only*** functionality.
 * Assets: Get & List
@@ -17,7 +17,10 @@ Currently, the C# Core SDK provides this ***read-only*** functionality.
 * Users: Get
 * Tokens: Get & List
 
-A roadmap of remaining features is in the package root for upcoming development.
+A roadmap pdf of remaining features is in the package root folder for upcoming development.
+<div>
+      <img src="https://user-images.githubusercontent.com/96668470/217699376-86d904c2-3355-4e9a-bb34-feae034e8494.png" width="1200"/>
+</div>
 
 ## Additional Documentation
 * Get started building on ImmutableX with the [Developer docs](https://docs.x.immutable.com/docs/welcome/)
@@ -51,9 +54,9 @@ email address and click submit.
 Three samples are provided to showcase some of the functionality such as fetching assets on IMX and getting user data.
 These examples can be found in `ImmutableSDK/Samples`.
 Demos use the below example wallets to auto fill that can be used for testing:
-0xF652A8bCb0Df65AE5fEd91DECaA8B591caeD1e1c
-0x5A7CB0ba4D94b6B08B837E4e97A90b9F2400C80D
-0x2d0ad946788938B9044ed72b1C464e1e9bb9d401
+* 0xF652A8bCb0Df65AE5fEd91DECaA8B591caeD1e1c
+* 0x5A7CB0ba4D94b6B08B837E4e97A90b9F2400C80D
+* 0x2d0ad946788938B9044ed72b1C464e1e9bb9d401
 
 ### 1. GetListedAssets
 This example shows how to fetch assets and apply filters to get results.

@@ -19,12 +19,20 @@ Samples require TextMeshPro to use interactive UI examples.
 The Immutable Core SDK C# requires several third party .DLL files that have been added to the plugins folder.
 
 ## Getting Started
-This package is in development and contains functionality to read from ImmutableX API endpoints.
+This package is in development and currently contains functionality to read from ImmutableX API endpoints.
 
 ### Installation
 
 Download the `.unitypackage` file from the Releases page and drag it into the `Assets/` window of an open project in the Unity Editor. 
 Alternatively, you can double click the Unity package file to open it and then follow the UPM installation instructions.
+
+### Registering with the Unity VS Team
+
+It's highly recommended to register your Immutable Unity SDK installation with the Unity Verified Solutions team in case support is required.
+
+To do so, from within the Unity Editor select `Immutable > Immutable Unity SDK` from the top navigation window after installing the plugin). In the window that opens, enter your 
+email address and click submit.
+
 
 ## Examples
 

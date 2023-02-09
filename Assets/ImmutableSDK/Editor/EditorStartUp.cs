@@ -9,7 +9,7 @@ namespace ImmutableSDK.Editor
         static Startup()
         {
             // Load the VSAttributionRegistration form state from EditorPrefs
-            var data = EditorPrefs.GetString("VSAttributionRegistration");
+            var data = EditorPrefs.GetString(VSAttributionRegistration.EDITOR_PREFS_KEY);
             VSAttributionRegistration.VSAttributionRegistrationState vsRegState = new();
             JsonUtility.FromJsonOverwrite(data, vsRegState);
             // If the form has not been submitted, initialize and pop up the editor window if not already open

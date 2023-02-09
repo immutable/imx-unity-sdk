@@ -1,16 +1,26 @@
-<div align="center">
-  <p align="center">
-    <a  href="https://docs.x.immutable.com/docs">
-      <img src="https://cdn.dribbble.com/users/1299339/screenshots/7133657/media/837237d447d36581ebd59ec36d30daea.gif" width="280"/>
-    </a>
-    <a href="https://unity.com">
-      <img src="https://cdn.fs.brandfolder.com/bx0Rp4uvSMSnwZdx0iOR" width="280" />
-    </a>
-  </p>
-</div>
-
 # Immutable Unity SDK
-The Immutable Unity SDK package provides access to ImmutableX API endpoints from within Unity projects using the Immutable Core SDK C#.
+The Immutable Unity SDK package provides access to ImmutableX API endpoints from within Unity projects using the Immutable Core SDK in C#.
+
+Currently, the C# Core SDK provides this ***read-only*** functionality.
+* Assets: Get & List
+* Balances: Get & List
+* Collections: Get & List & List with filters
+* Exchanges: Get & List
+* Metadata: Get
+* Mints: Get & List
+* NFT Checkout Primary: Get & List transactions, Get currencies
+* Deposits: Get & List
+* Withdrawals: Get & List
+* Transfers: Get & List
+* Trades: Get & List
+* Orders: Get & List
+* Users: Get
+* Tokens: Get & List
+
+## Additional Documentation
+* Get started building on ImmutableX with the [Developer docs](https://docs.x.immutable.com/docs/welcome/)
+* Check out the [API reference documentation](https://docs.x.immutable.com/reference)
+* For the C# Core SDK reference documentation, please see [here](https://docs.x.immutable.com/sdk-docs/core-sdk-csharp/overview)
 
 ## Prerequisites
 ### Unity 2022.2

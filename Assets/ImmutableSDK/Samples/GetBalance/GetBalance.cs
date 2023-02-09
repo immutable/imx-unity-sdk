@@ -27,11 +27,16 @@ namespace ImmutableSDK.Samples.GetBalance
         private TMP_Text resultText = null;
     
         private List<Balance> userBalances = new List<Balance>();
+        
+        private const string defaultWalletAddress = "0x2d0ad946788938B9044ed72b1C464e1e9bb9d401"; // Default address for a wallet
 
         private void Awake()
         {
             // Update balance text whenever user changes token type
             tokenDropdown.onValueChanged.AddListener((T0) => DisplaySelectedBalance());
+
+            // Populate Defaults
+            ownerInput.text = defaultWalletAddress;
         }
 
         /// <summary>

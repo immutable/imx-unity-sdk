@@ -1,8 +1,10 @@
+using System;
 using Imx.Sdk;
 using Imx.Sdk.Gen.Client;
 using Imx.Sdk.Gen.Model;
 using TMPro;
 using UnityEngine;
+using Environment = Imx.Sdk.Environment;
 
 namespace ImmutableSDK.Samples.GetStarkKeys
 {
@@ -19,6 +21,14 @@ namespace ImmutableSDK.Samples.GetStarkKeys
         
         [SerializeField]
         private TMP_Dropdown environmentDropdown = null;
+        
+        private const string defaultWalletAddress = "0xF652A8bCb0Df65AE5fEd91DECaA8B591caeD1e1c"; // Default address for a wallet
+        
+        private void Awake()
+        {
+            // Populate Defaults
+            userInputField.text = defaultWalletAddress;
+        }
 
         /// <summary>
         /// Looks up a user via a UserID and returns account information containing Stark Keys

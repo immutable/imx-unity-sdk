@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace ImmutableSDK.Samples.PurchaseFlow
 {
+    /// <summary>
+    /// Handles entering a user wallet and confirms it can be used to purchase assets
+    /// </summary>
     public class GetWallet : MonoBehaviour
     {
         [SerializeField]
@@ -26,6 +29,9 @@ namespace ImmutableSDK.Samples.PurchaseFlow
             StartCoroutine(GetKeys());
         }
 
+        /// <summary>
+        /// Fetches L2 keys to validate it is a valid wallet
+        /// </summary>
         private IEnumerator GetKeys()
         {
             // Create a client for sandbox assets and fetch

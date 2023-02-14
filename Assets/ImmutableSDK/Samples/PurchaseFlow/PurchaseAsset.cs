@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace ImmutableSDK.Samples.PurchaseFlow
 {
+    /// <summary>
+    /// Purchase screen to view assets, balance and purchase an asset
+    /// </summary>
     public class PurchaseAsset : MonoBehaviour
     {
         [SerializeField]
@@ -27,25 +30,32 @@ namespace ImmutableSDK.Samples.PurchaseFlow
                 Environment = EnvironmentSelector.Sandbox
             });
             
+            // Populate balance data
             StartCoroutine(GetBalance());
             
-            // ListAssetsResponse result = client.ListAssets(50, null, null, null, null, 
-            //     "withdrawable", null, null, true, null, null, null);
+            ListAssetsResponse result = client.ListAssets(50, null, null, null, null, 
+                null, null, null, true, null, null, null);
 
-            var result = client.ListOrders();
+            //var result = client.ListOrders();
 
             for (int i = 0; i < result.Result.Count; i++)
             {
-                //Debug.Log(result.Result[i]);
+                Debug.Log(result.Result[i]);
 
             }
         }
 
+        /// <summary>
+        /// Complete purchase flow and transfer to owned item screen
+        /// </summary>
         public void Purchase()
         {
             flowManager.CompletePurchase();
         }
 
+        /// <summary>
+        /// Fetches a user balance and populates a ui element
+        /// </summary>
         private IEnumerator GetBalance()
         {
             Task<ListBalancesResponse> listBalances = client.ListBalancesAsync(flowManager.walletID);
@@ -55,11 +65,11 @@ namespace ImmutableSDK.Samples.PurchaseFlow
                 yield return null;
             }
 
+            // Search specifically for ETH
             Balance ethBalance = null;
 
             for (int i = 0; i < listBalances.Result.Result.Count; i++)
             {
-                //Debug.Log(listBalances.Result.Result[i].ToJson());
                 if (listBalances.Result.Result[i].Symbol == "ETH")
                 {
                     ethBalance = listBalances.Result.Result[i];
@@ -67,6 +77,7 @@ namespace ImmutableSDK.Samples.PurchaseFlow
                 }
             }
 
+            // Populate existing ETH balance and convert from wei
             if (ethBalance == null)
             {
                 balanceText.text = "No Balances";

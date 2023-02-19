@@ -17,14 +17,23 @@ namespace ImmutableSDK.Samples.PurchaseFlow
         
         [SerializeField]
         private TMP_Text balanceText = null;
-
-        private const string collectionAddress = "0x4344b6E12F910B32f63c74B2937c49c0D2AAB513";
+        
+        [SerializeField]
+        private TMP_Text walletIDText = null;
+        
+        [SerializeField]
+        private PurchaseableAsset asset = null;
+        
+        [SerializeField]
+        private Transform listParent = null;
 
         private Client client = null;
     
         // Start is called before the first frame update
         void Start()
         {
+            walletIDText.text = flowManager.walletAddress;
+            
             // Init client
             client = new Client(new Config() {
                 Environment = EnvironmentSelector.Sandbox
@@ -34,15 +43,17 @@ namespace ImmutableSDK.Samples.PurchaseFlow
             StartCoroutine(GetBalance());
             
             ListAssetsResponse result = client.ListAssets(50, null, null, null, null, 
-                null, null, null, true, null, null, null);
-
-            //var result = client.ListOrders();
-
+                null, null, null, true, null, null, flowManager.collectionAddress);
+            
+            Debug.Log($"COllection: {flowManager.collectionAddress}");
+            
             for (int i = 0; i < result.Result.Count; i++)
             {
-                Debug.Log(result.Result[i]);
-
+                var newAsset = Instantiate(asset, listParent);
+                newAsset.Initialise(result.Result[i]);
             }
+            
+            asset.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -50,6 +61,7 @@ namespace ImmutableSDK.Samples.PurchaseFlow
         /// </summary>
         public void Purchase()
         {
+            // TODO: Purchasing asset missing
             flowManager.CompletePurchase();
         }
 
@@ -58,7 +70,7 @@ namespace ImmutableSDK.Samples.PurchaseFlow
         /// </summary>
         private IEnumerator GetBalance()
         {
-            Task<ListBalancesResponse> listBalances = client.ListBalancesAsync(flowManager.walletID);
+            Task<ListBalancesResponse> listBalances = client.ListBalancesAsync(flowManager.walletAddress);
             
             while (!listBalances.IsCompleted)
             {

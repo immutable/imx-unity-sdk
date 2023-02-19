@@ -21,7 +21,7 @@ namespace ImmutableSDK.Samples.PurchaseFlow
         
         private void Awake()
         {
-            walletInput.text = flowManager.walletID;
+            walletInput.text = flowManager.walletAddress;
         }
 
         public void GetWalletKeys()

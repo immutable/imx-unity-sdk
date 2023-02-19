@@ -33,7 +33,7 @@ namespace ImmutableSDK.Samples.PurchaseFlow
                 Environment = EnvironmentSelector.Sandbox
             });
             
-            ListAssetsResponse result = client.ListAssets(null, null, null, null, flowManager.walletID, 
+            ListAssetsResponse result = client.ListAssets(null, null, null, null, flowManager.walletAddress, 
                 null, null, null, null, null, null, null);
 
             for (int i = 0; i < result.Result.Count; i++)

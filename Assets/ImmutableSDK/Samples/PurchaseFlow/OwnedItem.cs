@@ -10,7 +10,7 @@ namespace ImmutableSDK.Samples.PurchaseFlow
     public class OwnedItem : MonoBehaviour
     {
         [SerializeField]
-        public TMP_Text name = null;
+        public TMP_Text itemName = null;
         
         [SerializeField]
         public TMP_Text address = null;
@@ -21,7 +21,7 @@ namespace ImmutableSDK.Samples.PurchaseFlow
         /// <param name="asset"> Asset used to populate </param>
         public void Initialise(AssetWithOrders asset)
         {
-            name.text = asset.Name;
+            itemName.text = asset.Name;
             address.text = asset.TokenAddress;
         }
     }

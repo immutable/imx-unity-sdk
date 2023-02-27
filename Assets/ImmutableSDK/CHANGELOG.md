@@ -1,3 +1,9 @@
+# [0.1.3] - 2023-02-27
+## Updated
+
+- Updated to use C# SDK v0.1.2
+- Update ListAssets example to use named parameters
+
 # [0.1.2] - 2023-02-09
 ## Added
 

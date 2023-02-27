@@ -69,8 +69,7 @@ namespace ImmutableSDK.Samples.GetListedAssets
                  Client client = new Client(new Config() {
                      Environment = env
                  });
-                 ListAssetsResponse result = client.ListAssets(pageSize, null, null, null, userInput.text, 
-                     null, nameInput.text, null, null, null, null, collectionInput.text);
+                 ListAssetsResponse result = client.ListAssets(pageSize: pageSize, user: userInput.text, name: nameInput.text, collection: collectionInput.text);
                  
                  Debug.Log(result.ToJson());
                  

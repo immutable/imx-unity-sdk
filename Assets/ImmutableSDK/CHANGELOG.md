@@ -1,3 +1,11 @@
+# [0.1.3] - 2023-02-28
+## Added
+
+## Changed
+* Converted JPG sprites to PNGs
+
+## Fixed
+
 # [0.1.2] - 2023-02-09
 ## Added
 

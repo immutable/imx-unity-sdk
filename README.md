@@ -6,6 +6,10 @@
   </p>
 </div>
 
+# 🚨 This library is no longer maintained 🚨
+
+If you're building apps with Immutable, please use [Immutable's Unified SDK](https://github.com/immutable/ts-immutable-sdk)
+
 # Immutable Unity SDK
 The Immutable Unity SDK package provides access to ImmutableX API endpoints from within Unity projects using the Immutable Core SDK C#.
 
